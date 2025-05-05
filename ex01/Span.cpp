@@ -22,7 +22,7 @@ void	Span::addNumber(int nb)
 	if (_vec.size() == _size)
 		throw std::out_of_range("Span is full");
 	else
-		_vec.emplace_back(nb);
+		_vec.push_back(nb);
 }
 
 
@@ -45,6 +45,7 @@ int	Span::longestSpan() const
 {
 	if(_vec.size() < 2)
 		throw std::logic_error("Not enough elements to find a span.");
-	std::pair<std::vector<int>::const_iterator, std::vector<int>::const_iterator> result = std::minmax_element(_vec.begin(), _vec.end());
-	return (*result.second - *result.first);
+	std::vector<int>::const_iterator min = std::min_element(_vec.begin(), _vec.end());
+	std::vector<int>::const_iterator max = std::max_element(_vec.begin(), _vec.end());
+	return (*max - *min);
 }
